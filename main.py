@@ -426,7 +426,7 @@ def get_dict_cached(table, id_col, name_col):
     return {row[1]: row[0] for row in rows}
 
 def login():
-    st.title("🏗️ Строительная компания – Учёт")
+    st.title("🏗️ СтройОпт")
     with st.form("login_form"):
         login = st.text_input("Логин")
         password = st.text_input("Пароль", type="password")
@@ -452,7 +452,7 @@ def login():
     st.caption("demo: admin / admin123 | manager / manager123 | viewer / viewer123")
 
 def main():
-    st.set_page_config(page_title="Строительная компания – Учёт", layout="wide", page_icon="🏗️")
+    st.set_page_config(page_title="СтройОпт", layout="wide", page_icon="🏗️")
     st.markdown("""
     <style>
         .stApp { background: linear-gradient(135deg, #f8f9fc 0%, #e9ecef 100%); }
