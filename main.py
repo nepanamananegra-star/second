@@ -1259,17 +1259,18 @@ def main():
 
     elif choice == "💾 Резервное копирование":
         st.header("💾 Резервное копирование")
-        if st.button("Создать резервную копию"):
-            os.makedirs("backups", exist_ok=True)
-            backup_path = os.path.join("backups", f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.db")
-            shutil.copy2(DB_NAME, backup_path)
-            st.toast(f"Копия создана: {backup_path}", icon="💾", duration=5000)
-        if os.path.exists("backups"):
-            files = os.listdir("backups")
-            if files:
-                st.subheader("Существующие копии")
-                for f in sorted(files, reverse=True):
-                    st.write(f)
+        if st.button("Скачать резервную копию базы данных"):
+            try:
+                with open(DB_NAME, "rb") as f:
+                    db_bytes = f.read()
+                st.download_button(
+                    label="📥 Сохранить файл",
+                    data=db_bytes,
+                    file_name=f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.db",
+                    mime="application/octet-stream"
+                )
+            except Exception as e:
+                st.error(f"Ошибка при чтении базы: {e}")
 
     elif choice == "⚙️ Генерация тестов":
         st.header("⚙️ Генерация тестовых данных")
